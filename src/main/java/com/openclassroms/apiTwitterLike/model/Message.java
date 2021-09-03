@@ -11,15 +11,19 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "messages")
 public class Message {
   
 	@Id
-	@GeneratedValue (strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	@Column(name = "author")
@@ -28,7 +32,8 @@ public class Message {
 	@Column(length = 200)
 	private String message;
 	
-	@Temporal(value= TemporalType.TIMESTAMP)
+	@Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Temporal(TemporalType.DATE)
 	private Date publictionDate;
 	
 }
